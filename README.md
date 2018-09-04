@@ -6,7 +6,7 @@
 # Vaadin Fluent Component API
 The missing Fluent API for Vaadin 10 Components.
 
-## 00.01.00-RPM-SNAPSHOT
+## 00.01.00-RPM
 * Component - the generic version
 * TextField
 * PasswordField
@@ -299,7 +299,51 @@ public class ComponentBuilder
 ```
 
 Now it is time to create the basic UI to show how we can use a 
-ComponentBuilder.
+generic ComponentBuilder. The example will show how to create an instance of a 
+PasswordField. 
+
+```java
+  private final PasswordField password = (PasswordField) new ComponentBuilder(PasswordField::new)
+      .setId("pf-password-id")
+      .set((Setter<PasswordField, String>) PasswordField::setPlaceholder, "password")
+      .build();
+```
+
+As you could see clearly, this is not nice because we have to put to much 
+type information´s into the code itself. For this there are 
+special Builder provided, like the ```PasswordFieldBuilder```
+
+
+```java
+  private final PasswordField password = new PasswordFieldBuilder(PasswordField::new)
+      .setId("pf-password-id")
+      .setPlaceholder("password")
+      .build();
+```
+
+If you have an instance already, you can use this one as well.
+Working with typed Composites will give you an already created instance of
+the type that is used inside the declaration.
+The demo app ist using a ```Composite<HorizontalLayout>``` as base.
+The method **getContent()** will give you exactly this instance.
+To configure the instance, use this on as input for the Builder.
+
+```java
+  public LoginView() {
+    new HorizontalLayoutBuilder(ofNullable(getContent()))
+        .setDefaultVerticalComponentAlignment(Alignment.CENTER)
+        .setJustifyContentMode(FlexComponent.JustifyContentMode.CENTER)
+        .setSizeFull()
+        .component()
+        .ifPresent(l -> l.add(layout));
+  }
+```
+
+This Add on is under active development.
+If you need some features, or more wrapped Components.... let me know
+You can reach me under my email or via Twitter (@SvenRuppert)
+
+Happy coding
 
 
 

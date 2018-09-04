@@ -27,6 +27,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Setter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.theme.Theme;
@@ -34,12 +35,14 @@ import com.vaadin.flow.theme.lumo.Lumo;
 import org.rapidpm.dependencies.core.logger.HasLogger;
 import org.rapidpm.vaadin.api.fluent.builder.button.ButtonBuilder;
 import org.rapidpm.vaadin.api.fluent.builder.checkbox.CheckboxBuilder;
+import org.rapidpm.vaadin.api.fluent.builder.component.ComponentBuilder;
 import org.rapidpm.vaadin.api.fluent.builder.layout.horizontal.HorizontalLayoutBuilder;
 import org.rapidpm.vaadin.api.fluent.builder.layout.vertical.VerticalLayoutBuilder;
 import org.rapidpm.vaadin.api.fluent.builder.passwordfield.PasswordFieldBuilder;
 import org.rapidpm.vaadin.api.fluent.builder.textfield.TextFieldBuilder;
 
 import java.time.LocalDateTime;
+import java.util.function.Function;
 
 import static demo.app.LoginView.NAV_LOGIN_VIEW;
 import static java.util.Optional.ofNullable;
@@ -53,7 +56,6 @@ public class LoginView extends Composite<HorizontalLayout> implements HasLogger 
   private final TextField username = new TextFieldBuilder(TextField::new)
       .set(Component::setId, "tf-username-id")
       .setPlaceholder("User Name") //.set(TextField::setPlaceholder, "User Name")
-
       .component()
       .get();
 
@@ -61,6 +63,7 @@ public class LoginView extends Composite<HorizontalLayout> implements HasLogger 
       .setId("pf-password-id")
       .setPlaceholder("password")
       .build();
+
 
   private final Checkbox rememberMe = new CheckboxBuilder(Checkbox::new)
       .setId("cb-remember-me-id")
