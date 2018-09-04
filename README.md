@@ -6,6 +6,8 @@
 # Vaadin Fluent Component API
 The missing Fluent API for Vaadin 10 Components.
 
+This is the JDK8 version for Vaadin 10!! 
+
 ## 00.01.00-RPM
 * Component - the generic version
 * TextField
