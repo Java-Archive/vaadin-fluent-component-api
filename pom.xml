@@ -30,7 +30,7 @@
   <groupId>org.rapidpm.vaadin</groupId>
   <artifactId>vaadin-fluent-component-api</artifactId>
   <name>RapidPM Vaadin Fluent Component API</name>
-  <version>00.01.00-RPM-SNAPSHOT</version>
+  <version>00.01.00-RPM</version>
 
 
   <packaging>jar</packaging>
