@@ -17,6 +17,16 @@ public interface VerticalLayoutMixin extends ComponentMixin<VerticalLayout> {
     return this;
   }
 
+
+
+//  delegating to add methods with void return
+
+
+
+
+
+
+
   //delegating
   default VerticalLayoutMixin setSpacing(boolean spacing) {
     return set(VerticalLayout::setSpacing, spacing);

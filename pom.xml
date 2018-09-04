@@ -21,16 +21,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.rapidpm</groupId>
-    <artifactId>rapidpm-dependencies</artifactId>
-    <version>04.00.06-RPM-SNAPSHOT</version>
-  </parent>
+  <!--<parent>-->
+    <!--<groupId>org.rapidpm</groupId>-->
+    <!--<artifactId>rapidpm-dependencies</artifactId>-->
+    <!--<version>04.00.06-RPM-SNAPSHOT</version>-->
+  <!--</parent>-->
 
   <groupId>org.rapidpm.vaadin</groupId>
   <artifactId>vaadin-fluent-component-api</artifactId>
   <name>RapidPM Vaadin Fluent Component API</name>
-  <version>00.07.05-RPM-SNAPSHOT</version>
+  <version>00.01.00-RPM-SNAPSHOT</version>
 
 
   <packaging>jar</packaging>
@@ -90,7 +90,6 @@
 
 
     <!--RapidPM-->
-    <rapidpm-functional-reactive.version>00.07.05-RPM-SNAPSHOT</rapidpm-functional-reactive.version>
     <rapidpm-dependencies.version>04.00.06-RPM-SNAPSHOT</rapidpm-dependencies.version>
 
     <!--Vaadin-->
@@ -121,20 +120,6 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>testbench-ng-bom</artifactId>
-        <version>${project.version}</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.rapidpm</groupId>
-        <artifactId>testbench-ng-bom-vaadin-v10</artifactId>
-        <version>${project.version}</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -145,29 +130,12 @@
       <version>${rapidpm-dependencies.version}</version>
     </dependency>
 
-    <!--<dependency>-->
-      <!--<groupId>org.rapidpm</groupId>-->
-      <!--<artifactId>rapidpm-functional-reactive</artifactId>-->
-      <!--<version>${rapidpm-functional-reactive.version}</version>-->
-    <!--</dependency>-->
-
-    <dependency>
-      <groupId>org.rapidpm</groupId>
-      <artifactId>testbench-ng-m-framework-v10</artifactId>
-    </dependency>
-
     <!--Infrastructure-->
     <dependency>
       <groupId>org.apache.meecrowave</groupId>
       <artifactId>meecrowave-core</artifactId>
       <version>${meecrowave.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.meecrowave</groupId>
-      <artifactId>meecrowave-specs-api</artifactId>
-      <version>${meecrowave.version}</version>
-      <scope>compile</scope>
+      <scope>test</scope>
     </dependency>
 
     <!--Vaadin -->
@@ -186,52 +154,17 @@
     <!--Security-->
 
     <!--Commons-->
-    <!--testbench Bug - could be removed in the future..-->
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>2.6</version>
-    </dependency>
-
-    <!--TDD-->
-    <dependency>
-      <groupId>org.rapidpm</groupId>
-      <artifactId>testbench-ng-m-container-init-meecrowave</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.rapidpm</groupId>
-      <artifactId>testbench-ng-m-pageobject-vaadin-generic</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.rapidpm</groupId>
-      <artifactId>testbench-ng-m-pageobject-vaadin-v10-tb</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <!--For TestUI only-->
-    <dependency>
-      <groupId>com.vaadin</groupId>
-      <artifactId>vaadin-testbench-core</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>org.seleniumhq.selenium</groupId>
-          <artifactId>selenium-server</artifactId>
-        </exclusion>
-      </exclusions>
-      <scope>test</scope>
-    </dependency>
-
 
     <!--Logging-->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -248,45 +181,6 @@
         <artifactId>meecrowave-maven-plugin</artifactId>
         <version>${meecrowave.version}</version>
       </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.1</version>
-        <configuration>
-          <!-- das brauchts leider, sonst muessen wir ein web.xml tippen... -->
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>com.github.webdriverextensions</groupId>
-        <artifactId>webdriverextensions-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>install-drivers</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <keepDownloadedWebdrivers>true</keepDownloadedWebdrivers>
-          <!--Distributed FS-->
-          <!--<installationDirectory>/Users/andidev/drivers</installationDirectory>-->
-          <installationDirectory>_data/webdrivers</installationDirectory>
-          <drivers>
-            <driver>
-              <name>chromedriver</name>
-            </driver>
-            <!--<driver>-->
-            <!--<name>operadriver</name>-->
-            <!--</driver>-->
-            <!--<driver>-->
-            <!--<name>geckodriver</name>-->
-            <!--</driver>-->
-          </drivers>
-        </configuration>
-      </plugin>
-
 
       <!--For Vaadin Directory deployment-->
       <plugin>
