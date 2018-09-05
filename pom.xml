@@ -22,9 +22,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <!--<parent>-->
-    <!--<groupId>org.rapidpm</groupId>-->
-    <!--<artifactId>rapidpm-dependencies</artifactId>-->
-    <!--<version>04.00.06-RPM-SNAPSHOT</version>-->
+  <!--<groupId>org.rapidpm</groupId>-->
+  <!--<artifactId>rapidpm-dependencies</artifactId>-->
+  <!--<version>04.00.06-RPM-SNAPSHOT</version>-->
   <!--</parent>-->
 
   <groupId>org.rapidpm.vaadin</groupId>
@@ -88,7 +88,7 @@
 
 
     <!--Vaadin-->
-    <vaadin.version>10.0.4</vaadin.version>
+    <vaadin.version>10.0.5</vaadin.version>
     <meecrowave.version>1.2.3</meecrowave.version>
 
     <!--Properties for Vaadin Directory-->
@@ -165,6 +165,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.0</version>
         <configuration>
           <archive>
             <index>true</index>
@@ -201,4 +202,92 @@
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>gen-javadoc</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>jar</goal>
+                  <goal>test-jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId><executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+            <configuration>
+              <!--<sourceFileExcludes>-->
+              <!--<sourceFileExclude>**/module-info.java</sourceFileExclude>-->
+              <!--</sourceFileExcludes>-->
+              <!--<dependencySourceExcludes>-->
+              <!--<dependencySourceExclude>**/module-info.java</dependencySourceExclude>-->
+              <!--</dependencySourceExcludes>-->
+              <additionalOptions>
+                <additionalOption>-Xdoclint:none</additionalOption>
+              </additionalOptions>
+              <destDir>target/doc/apidoc/</destDir>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>sys-nexus-deploy</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <distributionManagement>
+        <repository>
+          <id>sonatype-nexus</id>
+          <url>${sonatype-nexus-url}</url>
+        </repository>
+        <snapshotRepository>
+          <id>sonatype-nexus-snapshots</id>
+          <url>${sonatype-nexus-snapshots-url}</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+
+    <profile>
+      <id>sys-nexus-deploy-gpg</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
