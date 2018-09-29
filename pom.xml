@@ -29,9 +29,10 @@
 
   <groupId>org.rapidpm.vaadin</groupId>
   <artifactId>vaadin-fluent-component-api</artifactId>
-  <name>RapidPM Vaadin Fluent Component API</name>
   <version>00.01.00-RPM</version>
 
+  <name>RapidPM Vaadin Fluent Component API</name>
+  <description>The missing Fluent API for Vaadin Components</description>
 
   <packaging>jar</packaging>
 
