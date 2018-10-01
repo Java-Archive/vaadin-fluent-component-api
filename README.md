@@ -4,6 +4,14 @@
 </center>
 
 # Vaadin Fluent Component API
+
+
+
+>IMPORTAND This component is replaced to
+>[https://github.com/vaadin-developer/vaadin-components](https://github.com/vaadin-developer/vaadin-components)
+
+
+
 The missing Fluent API for Vaadin 10 Components.
 
 This is the JDK8 version for Vaadin 10!! 
